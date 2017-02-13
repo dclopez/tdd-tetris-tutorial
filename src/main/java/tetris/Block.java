@@ -7,5 +7,9 @@ public class Block {
 	public Block (char name){
 		this.name= name;
 	}
+	
+	public char getName(){
+		return this.name;
+	}
 
 }
