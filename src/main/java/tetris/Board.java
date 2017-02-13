@@ -10,6 +10,7 @@ public class Board {
     private final int columns;
     private Boolean hasFalling;
     private Block [][] situation;
+    private Block fallingBlock;
 
     public Board(int rows, int columns) {
         this.rows = rows;
@@ -17,6 +18,7 @@ public class Board {
         this.hasFalling= false;
         this.situation = new Block[this.rows][this.columns];
         Block emptyBlock = new Block('.');
+        this.fallingBlock=emptyBlock;
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
                 this.situation[row][col] = emptyBlock;
@@ -40,14 +42,26 @@ public class Board {
     }
     
     public void drop(Block block){
+    	if (this.hasFalling){
+    		throw new IllegalStateException("already falling");
+    	}
     	this.situation[0][1]=block;
+    	block.setCurrentRow(0);
+    	block.setCurrentCol(1);
+    	this.fallingBlock=block;
     	this.hasFalling= true;
     }
     
     public void tick(){
-    	Block block_to_move = this.situation[0][1];
     	Block emptyBlock=new Block('.');
-    	this.situation[0][1]=emptyBlock;
-    	this.situation[1][1]=block_to_move;
+    	int row = this.fallingBlock.getCurrentRow();
+    	if (row == rows-1){
+    		this.hasFalling=false;
+    	}else{
+    		this.situation[row][1]=emptyBlock;
+        	this.situation[row + 1][1]=this.fallingBlock;
+        	this.fallingBlock.setCurrentRow(row + 1);
+    	}
+    	
     }
 }
