@@ -57,6 +57,8 @@ public class Board {
     	int row = this.fallingBlock.getCurrentRow();
     	if (row == rows-1){
     		this.hasFalling=false;
+    	}else if(this.situation[row + 1][1].getName()!='.'){
+    		this.hasFalling=false;
     	}else{
     		this.situation[row][1]=emptyBlock;
         	this.situation[row + 1][1]=this.fallingBlock;
