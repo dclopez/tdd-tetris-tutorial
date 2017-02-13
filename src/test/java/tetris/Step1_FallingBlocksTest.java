@@ -38,7 +38,7 @@ public class Step1_FallingBlocksTest extends Assert {
     }
 
 
-    public class When_a_block_is_dropped {
+   public class When_a_block_is_dropped {
 
         @Before
         public void dropBlock() {
@@ -50,22 +50,22 @@ public class Step1_FallingBlocksTest extends Assert {
             assertTrue(board.hasFalling());
         }
 
-//        @Test
-//        public void it_starts_from_the_top_middle() {
-//            assertEquals("" +
-//                    ".X.\n" +
-//                    "...\n" +
-//                    "...\n", board.toString());
-//        }
+        @Test
+        public void it_starts_from_the_top_middle() {
+            assertEquals("" +
+                    ".X.\n" +
+                    "...\n" +
+                    "...\n", board.toString());
+        }
 
-//        @Test
-//        public void it_moves_down_one_row_per_tick() {
-//            board.tick();
-//            assertEquals("" +
-//                    "...\n" +
-//                    ".X.\n" +
-//                    "...\n", board.toString());
-//        }
+        @Test
+        public void it_moves_down_one_row_per_tick() {
+            board.tick();
+            assertEquals("" +
+                    "...\n" +
+                    ".X.\n" +
+                    "...\n", board.toString());
+        }
 
 //        @Test
 //        public void at_most_one_block_may_be_falling_at_a_time() {
