@@ -79,6 +79,18 @@ public class Piece {
                 "...\n" +
                 "XX.\n" +
                 "...\n";
+		String pointingTop5x5="" +
+                "..XXX\n" +
+                "..XX.\n" +
+                "..X..\n" +
+                ".....\n" +
+                ".....\n";
+		String pointingLeft5x5="" +
+                "X....\n" +
+                "XX...\n" +
+                "XXX..\n" +
+                ".....\n" +
+                ".....\n";
 		Piece piece = null;
 		
 		if (this.composition.equals(pointingTop)){
@@ -93,6 +105,9 @@ public class Piece {
 		if(this.composition.equals(pointingLeft)){
 			piece= new Piece(pointingDown);
 			}
+		if(this.composition.equals(pointingTop5x5)){
+			piece= new Piece(pointingLeft5x5);
+		}
 		return piece;
 		}
 }
