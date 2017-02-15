@@ -28,8 +28,22 @@ public class Piece {
                 "...\n" +
                 "XX.\n" +
                 "...\n";
+		String pointingTop5x5="" +
+                "..XXX\n" +
+                "..XX.\n" +
+                "..X..\n" +
+                ".....\n" +
+                ".....\n";
+		String pointingRight5x5="" +
+                ".....\n" +
+                ".....\n" +
+                "..XXX\n" +
+                "...XX\n" +
+                "....X\n";
 		Piece piece = null;
-		
+		//no se utiliza switch porque no permite utilizar variables y en principio el 
+		//código quedaba menos legible metiendo todos los strings de arriba como constantes
+		//en los case
 		if (this.composition.equals(pointingTop)){
 			piece= new Piece(pointingRight);
 		}
@@ -42,6 +56,9 @@ public class Piece {
 		if(this.composition.equals(pointingLeft)){
 			piece= new Piece(pointingTop);
 			}
+		if(this.composition.equals(pointingTop5x5)){
+			piece= new Piece(pointingRight5x5);
+		}
 		return piece;
 		}
 	

@@ -61,7 +61,7 @@ public class Step2_RotatingPiecesOfBlocksTest extends Assert {
     }
 
 
-/*
+
     public class A_piece_of_5x5_blocks {
 
         @Before
@@ -84,16 +84,16 @@ public class Step2_RotatingPiecesOfBlocksTest extends Assert {
                     ".....\n", piece.toString());
         }
 
-//        @Test
-//        public void can_be_rotated_right() {
-//            piece = piece.rotateRight();
-//            assertEquals("" +
-//                    ".....\n" +
-//                    ".....\n" +
-//                    "..XXX\n" +
-//                    "...XX\n" +
-//                    "....X\n", piece.toString());
-//        }
+        @Test
+        public void can_be_rotated_right() {
+            piece = piece.rotateRight();
+            assertEquals("" +
+                    ".....\n" +
+                    ".....\n" +
+                    "..XXX\n" +
+                    "...XX\n" +
+                    "....X\n", piece.toString());
+        }
 
 //        @Test
 //        public void can_be_rotated_left() {
@@ -106,5 +106,5 @@ public class Step2_RotatingPiecesOfBlocksTest extends Assert {
 //                    ".....\n", piece.toString());
 //        }
     }
-*/
+
 }
