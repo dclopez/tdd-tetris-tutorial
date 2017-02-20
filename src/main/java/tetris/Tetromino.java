@@ -52,8 +52,40 @@ public class Tetromino {
 		return tetro;
 	}
 	
-	public void rotateLeft(){
-		
+	public Tetromino rotateLeft(){
+		String pointingTop="" +
+                ".T.\n" +
+                "TTT\n" +
+                "...\n";
+		String pointingRight = "" +
+                ".T.\n" +
+                ".TT\n" +
+                ".T.\n";
+		String pointingDown = "" +
+                "...\n" +
+                "TTT\n" +
+                ".T.\n";
+		String pointingLeft= "" +
+                ".T.\n" +
+                "TT.\n" +
+                ".T.\n";
+
+		Tetromino tetro = null;
+
+		if (this.shape.equals(pointingTop)){
+			tetro= new Tetromino(pointingLeft);
+		}
+		if (this.shape.equals(pointingRight)){
+			tetro= new Tetromino(pointingTop);
+		}
+		if (this.shape.equals(pointingDown)){
+			tetro= new Tetromino(pointingRight);
+		}
+		if(this.shape.equals(pointingLeft)){
+			tetro= new Tetromino(pointingDown);
+			}
+
+		return tetro;
 	}
 
 }
