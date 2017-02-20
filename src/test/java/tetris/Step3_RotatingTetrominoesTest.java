@@ -39,21 +39,21 @@ public class Step3_RotatingTetrominoesTest extends Assert {
     }
 
 
-//    public class The_T_shape {
-//
-//        @Before
-//        public void createTShape() {
-//            shape = Tetromino.T_SHAPE;
-//        }
-//
-//        @Test
-//        public void is_shaped_like_T() {
-//            assertEquals("" +
-//                    ".T.\n" +
-//                    "TTT\n" +
-//                    "...\n", shape.toString());
-//        }
-//
+    public class The_T_shape {
+
+        @Before
+        public void createTShape() {
+            shape = Tetromino.T_SHAPE;
+        }
+
+        @Test
+        public void is_shaped_like_T() {
+            assertEquals("" +
+                    ".T.\n" +
+                    "TTT\n" +
+                    "...\n", shape.toString());
+        }
+
 //       @Test
 //       public void can_be_rotated_right_3_times() {
 //           shape = shape.rotateRight();
@@ -100,8 +100,8 @@ public class Step3_RotatingTetrominoesTest extends Assert {
 //           shape = shape.rotateLeft().rotateLeft().rotateLeft().rotateLeft();
 //           assertEquals(originalShape, shape.toString());
 //       }
-//    }
-//
+    }
+
 //
 //    public class The_I_shape {
 //
