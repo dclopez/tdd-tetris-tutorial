@@ -5,6 +5,11 @@ public class Tetromino {
 	public static final Tetromino T_SHAPE = new Tetromino("" + ".T.\n"
 															 + "TTT\n" 
 			                                                 + "...\n");
+	public static final Tetromino I_SHAPE = new Tetromino("" +
+                                                          "....\n" +
+                                                          "IIII\n" +
+                                                          "....\n" +
+                                                          "....\n");
 
 	private String shape;
 
@@ -17,22 +22,52 @@ public class Tetromino {
 	}
 	
 	public Tetromino rotateRight(){
-		String pointingTop="" +
-                ".T.\n" +
-                "TTT\n" +
-                "...\n";
-		String pointingRight = "" +
-                ".T.\n" +
-                ".TT\n" +
-                ".T.\n";
-		String pointingDown = "" +
-                "...\n" +
-                "TTT\n" +
-                ".T.\n";
-		String pointingLeft= "" +
-                ".T.\n" +
-                "TT.\n" +
-                ".T.\n";
+		String pointingTop=null;
+		String pointingRight=null;
+		String pointingDown=null;
+		String pointingLeft=null;
+		if(this.shape.length()<13){
+			pointingTop="" +
+	                ".T.\n" +
+	                "TTT\n" +
+	                "...\n";
+			pointingRight = "" +
+	                ".T.\n" +
+	                ".TT\n" +
+	                ".T.\n";
+			pointingDown = "" +
+	                "...\n" +
+	                "TTT\n" +
+	                ".T.\n";
+			pointingLeft= "" +
+	                ".T.\n" +
+	                "TT.\n" +
+	                ".T.\n";
+		}
+		
+		if (this.shape.length()>13){
+			pointingTop="" +
+                    "....\n" +
+                    "IIII\n" +
+                    "....\n" +
+                    "....\n";
+			pointingRight ="" +
+                    "..I.\n" +
+                    "..I.\n" +
+                    "..I.\n" +
+                    "..I.\n";
+			pointingDown ="" +
+                    "....\n" +
+                    "....\n" +
+                    "IIII\n" +
+                    "....\n";
+			pointingLeft= "" +
+                    ".I..\n" +
+                    ".I..\n" +
+                    ".I..\n" +
+                    ".I..\n";
+		}
+		
 
 		Tetromino tetro = null;
 
@@ -53,22 +88,51 @@ public class Tetromino {
 	}
 	
 	public Tetromino rotateLeft(){
-		String pointingTop="" +
-                ".T.\n" +
-                "TTT\n" +
-                "...\n";
-		String pointingRight = "" +
-                ".T.\n" +
-                ".TT\n" +
-                ".T.\n";
-		String pointingDown = "" +
-                "...\n" +
-                "TTT\n" +
-                ".T.\n";
-		String pointingLeft= "" +
-                ".T.\n" +
-                "TT.\n" +
-                ".T.\n";
+		String pointingTop=null;
+		String pointingRight=null;
+		String pointingDown=null;
+		String pointingLeft=null;
+		if(this.shape.length()<13){
+			pointingTop="" +
+	                ".T.\n" +
+	                "TTT\n" +
+	                "...\n";
+			pointingRight = "" +
+	                ".T.\n" +
+	                ".TT\n" +
+	                ".T.\n";
+			pointingDown = "" +
+	                "...\n" +
+	                "TTT\n" +
+	                ".T.\n";
+			pointingLeft= "" +
+	                ".T.\n" +
+	                "TT.\n" +
+	                ".T.\n";
+		}
+		
+		if (this.shape.length()>13){
+			pointingTop="" +
+                    "....\n" +
+                    "IIII\n" +
+                    "....\n" +
+                    "....\n";
+			pointingRight ="" +
+                    "..I.\n" +
+                    "..I.\n" +
+                    "..I.\n" +
+                    "..I.\n";
+			pointingDown ="" +
+                    "....\n" +
+                    "....\n" +
+                    "IIII\n" +
+                    "....\n";
+			pointingLeft= "" +
+                    ".I..\n" +
+                    ".I..\n" +
+                    ".I..\n" +
+                    ".I..\n";
+		}
 
 		Tetromino tetro = null;
 
@@ -83,7 +147,7 @@ public class Tetromino {
 		}
 		if(this.shape.equals(pointingLeft)){
 			tetro= new Tetromino(pointingDown);
-			}
+		}
 
 		return tetro;
 	}
