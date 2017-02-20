@@ -10,6 +10,10 @@ public class Tetromino {
                                                           "IIII\n" +
                                                           "....\n" +
                                                           "....\n");
+	public static final Tetromino O_SHAPE = new Tetromino("" +
+                                                          ".OO\n" +
+                                                          ".OO\n" +
+                                                          "...\n");
 
 	private String shape;
 
@@ -26,7 +30,7 @@ public class Tetromino {
 		String pointingRight=null;
 		String pointingDown=null;
 		String pointingLeft=null;
-		if(this.shape.length()<13){
+		if(this.shape.length()<13 && this.shape.toCharArray()[5]=='T'){
 			pointingTop="" +
 	                ".T.\n" +
 	                "TTT\n" +
@@ -43,6 +47,25 @@ public class Tetromino {
 	                ".T.\n" +
 	                "TT.\n" +
 	                ".T.\n";
+		}
+		
+		if(this.shape.length()<13 && this.shape.toCharArray()[5]=='O'){
+			pointingTop="" +
+                    ".OO\n" +
+                    ".OO\n" +
+                    "...\n";
+			pointingRight = "" +
+                    "...\n" +
+                    ".OO\n" +
+                    ".OO\n";
+			pointingDown = "" +
+                    "...\n" +
+                    "OO.\n" +
+                    "OO.\n";
+			pointingLeft= "" +
+                    "OO.\n" +
+                    "OO.\n" +
+                    "...\n";
 		}
 		
 		if (this.shape.length()>13){
@@ -92,7 +115,7 @@ public class Tetromino {
 		String pointingRight=null;
 		String pointingDown=null;
 		String pointingLeft=null;
-		if(this.shape.length()<13){
+		if(this.shape.length()<13 && this.shape.toCharArray()[5]=='T'){
 			pointingTop="" +
 	                ".T.\n" +
 	                "TTT\n" +
@@ -109,6 +132,25 @@ public class Tetromino {
 	                ".T.\n" +
 	                "TT.\n" +
 	                ".T.\n";
+		}
+		
+		if(this.shape.length()<13 && this.shape.toCharArray()[5]=='O'){
+			pointingTop="" +
+                    ".OO\n" +
+                    ".OO\n" +
+                    "...\n";
+			pointingRight = "" +
+                    "...\n" +
+                    ".OO\n" +
+                    ".OO\n";
+			pointingDown = "" +
+                    "...\n" +
+                    "OO.\n" +
+                    "OO.\n";
+			pointingLeft= "" +
+                    "OO.\n" +
+                    "OO.\n" +
+                    "...\n";
 		}
 		
 		if (this.shape.length()>13){
