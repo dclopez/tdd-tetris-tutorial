@@ -11,7 +11,6 @@ import org.junit.runner.RunWith;
 /**
  * @author Esko Luontola
  */
-@Ignore("contains no test")
 @RunWith(NestedJUnit.class)
 public class Step4_FallingPiecesTest extends Assert {
 
@@ -20,7 +19,7 @@ public class Step4_FallingPiecesTest extends Assert {
     // - See the README for how to proceed with this refactoring in safe steps
     // - Next step: MovingAFallingPieceTest
 
-/*
+
     private final Board board = new Board(6, 8);
 
 
@@ -42,9 +41,9 @@ public class Step4_FallingPiecesTest extends Assert {
                     "........\n", board.toString());
         }
     }
-*/
 
-/*
+
+
     public class When_a_piece_reaches_the_bottom {
 
         @Before
@@ -68,20 +67,20 @@ public class Step4_FallingPiecesTest extends Assert {
             assertTrue(board.hasFalling());
         }
 
-//        @Test
-//        public void it_stops_when_it_hits_the_bottom() {
-//            board.tick();
-//            assertEquals("" +
-//                    "........\n" +
-//                    "........\n" +
-//                    "........\n" +
-//                    "........\n" +
-//                    "....T...\n" +
-//                    "...TTT..\n", board.toString());
-//            assertFalse(board.hasFalling());
-//        }
+        @Test
+        public void it_stops_when_it_hits_the_bottom() {
+            board.tick();
+            assertEquals("" +
+                    "........\n" +
+                    "........\n" +
+                    "........\n" +
+                    "........\n" +
+                    "....T...\n" +
+                    "...TTT..\n", board.toString());
+            assertFalse(board.hasFalling());
+        }
     }
-*/
+
 
 /*
     public class When_a_piece_lands_on_another_piece {
