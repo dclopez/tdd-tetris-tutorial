@@ -1,37 +1,29 @@
 package tetris;
 
-public class Block {
-	
-	private char name;
-	private int currentRow;
-	private int currentCol;
-	
-	public Block (char name){
-		this.name= name;
-		this.currentRow=-1;
-		this.currentCol=-1;
-	}
-	
-	public char getName(){
-		return this.name;
-	}
+public class Block implements BoardPiece {
 
-	public int getCurrentRow() {
-		return currentRow;
-	}
+    private final char block;
 
-	public void setCurrentRow(int currentRow) {
-		this.currentRow = currentRow;
-	}
+    public Block(char block) {
+        this.block = block;
+    }
 
-	public int getCurrentCol() {
-		return currentCol;
-	}
+    public String toString() {
+        char block_as_string[] = { block };
+        return new String(block_as_string);
+    }
 
-	public void setCurrentCol(int currentCol) {
-		this.currentCol = currentCol;
-	}
-	
-	
+    public int width() {
+        return 1;
+    }
+
+    public int height() {
+        return 1;
+    }
+
+    public boolean is_hollow_at(int i, int j) {
+        return ((i!=0) && (j!=0));
+
+    }
 
 }

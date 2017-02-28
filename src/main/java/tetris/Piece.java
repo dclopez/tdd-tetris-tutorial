@@ -1,113 +1,77 @@
 package tetris;
 
-public class Piece {
-	private String composition;
-	
-	public Piece(String composition){
-		this.composition= composition;
-	}
-	
-	public String toString(){
-		return this.composition;
-	}
-	
-	public Piece rotateRight(){
-		String pointingTop="" +
-                ".X.\n" +
-                ".X.\n" +
-                "...\n";
-		String pointingRight = "" +
-                "...\n" +
-                ".XX\n" +
-                "...\n";
-		String pointingDown = "" +
-                "...\n" +
-                ".X.\n" +
-                ".X.\n";
-		String pointingLeft= "" +
-                "...\n" +
-                "XX.\n" +
-                "...\n";
-		String pointingTop5x5="" +
-                "..XXX\n" +
-                "..XX.\n" +
-                "..X..\n" +
-                ".....\n" +
-                ".....\n";
-		String pointingRight5x5="" +
-                ".....\n" +
-                ".....\n" +
-                "..XXX\n" +
-                "...XX\n" +
-                "....X\n";
-		Piece piece = null;
-		//no se utiliza switch porque no permite utilizar variables y en principio el 
-		//código quedaba menos legible metiendo todos los strings de arriba como constantes
-		//en los case
-		if (this.composition.equals(pointingTop)){
-			piece= new Piece(pointingRight);
-		}
-		if (this.composition.equals(pointingRight)){
-			piece= new Piece(pointingDown);
-		}
-		if (this.composition.equals(pointingDown)){
-			piece= new Piece(pointingLeft);
-		}
-		if(this.composition.equals(pointingLeft)){
-			piece= new Piece(pointingTop);
-			}
-		if(this.composition.equals(pointingTop5x5)){
-			piece= new Piece(pointingRight5x5);
-		}
-		return piece;
-		}
-	
-	public Piece rotateLeft(){
-		String pointingTop="" +
-                ".X.\n" +
-                ".X.\n" +
-                "...\n";
-		String pointingRight = "" +
-                "...\n" +
-                ".XX\n" +
-                "...\n";
-		String pointingDown = "" +
-                "...\n" +
-                ".X.\n" +
-                ".X.\n";
-		String pointingLeft= "" +
-                "...\n" +
-                "XX.\n" +
-                "...\n";
-		String pointingTop5x5="" +
-                "..XXX\n" +
-                "..XX.\n" +
-                "..X..\n" +
-                ".....\n" +
-                ".....\n";
-		String pointingLeft5x5="" +
-                "X....\n" +
-                "XX...\n" +
-                "XXX..\n" +
-                ".....\n" +
-                ".....\n";
-		Piece piece = null;
-		
-		if (this.composition.equals(pointingTop)){
-			piece= new Piece(pointingLeft);
-		}
-		if (this.composition.equals(pointingRight)){
-			piece= new Piece(pointingTop);
-		}
-		if (this.composition.equals(pointingDown)){
-			piece= new Piece(pointingRight);
-		}
-		if(this.composition.equals(pointingLeft)){
-			piece= new Piece(pointingDown);
-			}
-		if(this.composition.equals(pointingTop5x5)){
-			piece= new Piece(pointingLeft5x5);
-		}
-		return piece;
-		}
+public class Piece implements BoardPiece {
+
+    private Block[][] blocks;
+    
+    public Piece(String piece) {
+        String[] rows = piece.split("\n");
+        for (int i=0; i<rows.length; i++) {
+            char[] column = rows[i].toCharArray();
+            for (int j=0; j<column.length; j++) {
+                if ((i==0) && (j==0)) {
+                    blocks = new Block[rows.length][column.length];
+                }
+                blocks[i][j] = new Block(column[j]);
+            }
+        }
+    }
+
+    public String toString() {
+        String s = "";
+        if (blocks != null) {
+            for (int i=0; i<blocks.length; i++) {
+                for (int j=0; j<blocks[i].length; j++) {
+                    s += blocks[i][j].toString();
+                }
+            s += "\n";
+            }
+        }
+        return s;
+    }
+
+    public int width() {
+        return blocks[0].length;
+    }
+
+    public int height() {
+        return blocks.length;
+    }
+
+    public boolean is_hollow_at(int i, int j) {
+        return blocks[i][j].toString().equals(String.valueOf(BoardPiece.EMPTY));
+    }
+
+    public Piece rotateRight() { // transpose + reverse each row
+        return new Piece(reverse_rows(transpose(blocks)));
+    }
+
+    public Piece rotateLeft() { // reverse each row + transpose
+        return new Piece(transpose(reverse_rows(blocks)));
+    }
+
+    private Block[][] transpose(Block blocks[][]) {
+        Block[][] transposedBlocks = new Block[blocks.length][blocks[0].length];
+        for (int i=0; i<blocks.length; i++) {
+            for (int j=0; j<blocks[i].length; j++) {
+                transposedBlocks[j][i] = blocks[i][j];
+            }
+        }
+        return transposedBlocks;
+    }
+
+    private Block[][] reverse_rows(Block blocks[][]) {
+        Block[][] reversedBlocks = new Block[blocks.length][blocks[0].length];
+        for (int i=0; i<blocks.length; i++) {
+            for (int j=0; j<blocks[i].length; j++) {
+                reversedBlocks[i][j] = blocks[i][blocks[i].length-j-1];
+            }
+        }
+        return reversedBlocks;
+    }
+
+    private Piece(Block blocks[][]) {
+        this.blocks = blocks;
+    }
+    
 }

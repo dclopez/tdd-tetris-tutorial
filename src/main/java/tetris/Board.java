@@ -4,122 +4,208 @@
 
 package tetris;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Board {
 
-    private final int rows;
-    private final int columns;
-    private Boolean hasFalling;
-    private Boolean hasFallingBlock;
-    private Boolean hasFallingTetro;
-    private Block [][] situation;
-    private Block fallingBlock;
-    private List<Block> fallingTetro;
-    Block emptyBlock = new Block('.');
-    
+	public static final String ALREADY_FALLING = "already falling";
+	public static final String OUT_OF_BOARD = "out of board";
 
-    public Board(int rows, int columns) {
-        this.rows = rows;
-        this.columns = columns;
-        this.hasFalling= false;
-        this.hasFallingTetro= false;
-        this.hasFallingBlock=false;
-        this.situation = new Block[this.rows][this.columns];
-        this.fallingBlock=this.emptyBlock;
-        this.fallingTetro=new ArrayList<Block>();
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < columns; col++) {
-                this.situation[row][col] = emptyBlock;
-            }
-        }
-    }
+	private final int rows;
+	private final int columns;
+	private BoardPiece falling_block;
+	private int current_block_row;
+	private int current_block_column;
+	private char board[][];
+	private boolean last_tick;
 
-    public String toString() {
-        String s = "";
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < columns; col++) {
-                s += this.situation[row][col].getName();
-            }
-            s += "\n";
-        }
-        return s;
-    }
-    
-    public Boolean hasFalling(){
-    	return this.hasFalling;
-    }
-    
-    public void drop(Block block){
-    	if (this.hasFalling){
-    		throw new IllegalStateException("already falling");
-    	}
-    	this.situation[0][1]=block;
-    	block.setCurrentRow(0);
-    	block.setCurrentCol(1);
-    	this.fallingBlock=block;
-    	this.hasFallingBlock=true;
-    	this.hasFalling= true;
-    }
-    
-    public void drop(Tetromino tetro){
-    	if(tetro.toString().equals(Tetromino.T_SHAPE.toString())){
-    		Block t1 = new Block('T');
-    		t1.setCurrentRow(1);
-    		t1.setCurrentCol(3);
-    		this.fallingTetro.add(t1);
-    		this.situation[1][3]=t1;
-    		Block t2 = new Block('T');
-    		t2.setCurrentRow(1);
-    		t2.setCurrentCol(4);
-    		this.fallingTetro.add(t2);
-    		this.situation[1][4]=t2;
-    		Block t3 = new Block('T');
-    		t3.setCurrentRow(1);
-    		t3.setCurrentCol(5);
-    		this.fallingTetro.add(t3);
-    		this.situation[1][5]=t3;
-    		Block t4 = new Block('T');
-    		t4.setCurrentRow(0);
-    		t4.setCurrentCol(4);
-    		this.fallingTetro.add(t4);
-    		this.situation[0][4]=t4;
-    		this.hasFallingTetro=true;
-    		this.hasFalling=true;
-    	}
-    	
-    }
-    
-    public void tick(){
-    	if (this.hasFallingBlock){
-    		this.tickBlock();
-    	}
-    	if (this.hasFallingTetro){
-    		this.tickTetro();
-    	}
-    }
-    
-    public void tickBlock(){
-    	int row = this.fallingBlock.getCurrentRow();
-    	int col = this.fallingBlock.getCurrentCol();
-    	if (row == rows-1){
-    		this.hasFalling=false;
-    	}else if(this.situation[row + 1][col].getName()!='.'){
-    		this.hasFalling=false;
-    	}else{
-    		this.situation[row][col]=this.emptyBlock;
-        	this.situation[row + 1][col]=this.fallingBlock;
-        	this.fallingBlock.setCurrentRow(row + 1);
-    	}
-    	
-    }
-    
-    public void tickTetro(){
-    	for(int i=0;i<this.fallingTetro.size();i++){
-    		this.fallingBlock=this.fallingTetro.get(i);
-    		this.tickBlock();
-    		this.fallingBlock=this.emptyBlock;
-    	}
-    }
+	public Board(int rows, int columns) {
+		this.rows = rows;
+		this.columns = columns;
+		this.falling_block = null;
+		this.board = new char[rows][columns];
+		fill_with(board, BoardPiece.EMPTY);
+		this.last_tick = false;
+	}
+
+	public String toString() {
+		String s = "";
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board[0].length; j++) {
+				if (falling_block_is_at(i, j)) {
+					char block[][] = new char[falling_block.width()][falling_block
+							.height()];
+					fill_with(block, falling_block.toString());
+					s += block[(i - current_block_row)][(j - current_block_column)];
+				} else {
+					char c[] = { board[i][j] };
+					s += new String(c);
+				}
+			}
+			s += "\n";
+		}
+		return s;
+	}
+
+	public boolean hasFalling() {
+		return (falling_block != null);
+	}
+
+	public void drop(BoardPiece b) throws IllegalStateException {
+		if ((falling_block == null) || (last_tick)) {
+			falling_block = b;
+			current_block_row = 0;
+			current_block_column = (this.columns / 2) - (b.width() / 2);
+		} else {
+			throw new IllegalStateException(Board.ALREADY_FALLING);
+		}
+	}
+
+	public void tick() {
+		if (falling_block != null) {
+			if (!last_tick) {
+				current_block_row++;
+				if (reached_bottom() || touched_another_block()) {
+					last_tick = true;
+				}
+			} else {
+				fill_with(board, toString());
+				falling_block = null;
+				last_tick = false;
+			}
+		}
+	}
+
+	private void fill_with(char matrix[][], char c) {
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix[0].length; j++) {
+				matrix[i][j] = c;
+			}
+		}
+	}
+
+	private void fill_with(char matrix[][], String s) {
+		String[] rows = s.split("\n");
+		for (int i = 0; i < rows.length; i++) {
+			char[] column = rows[i].toCharArray();
+			for (int j = 0; j < column.length; j++) {
+				matrix[i][j] = column[j];
+			}
+		}
+	}
+
+	private boolean reached_bottom() {
+		int reached_row = current_block_row;
+		String[] s = falling_block.toString().split("\n");
+
+		for (int i = 0; i < s.length; i++) {
+			if (s[i].replace(BoardPiece.EMPTY, ' ').trim().length() != 0) {
+				reached_row++;
+			}
+		}
+
+		return (reached_row == rows);
+	}
+
+	private boolean reached_right() {
+		int reached_col = current_block_column;
+		String[] s = falling_block.toString().split("\n");
+
+		for (int i = 0; i < s.length; i++) {
+			if (s[i].replace(BoardPiece.EMPTY, ' ').trim().length() != 0) {
+				reached_col++;
+			}
+		}
+
+		return (reached_col == columns-1);
+	}
+
+	private boolean reached_left() {
+		int reached_col = current_block_column;
+		String[] s = falling_block.toString().split("\n");
+
+		for (int i = s.length - 1; i > 0; i--) {
+			if (s[i].replace(BoardPiece.EMPTY, ' ').trim().length() != 0) {
+				reached_col--;
+			}
+		}
+
+		return (reached_col == -1);
+	}
+
+	private boolean touched_another_block() {
+		for (int i = 0; i < rows - 1; i++) {
+			for (int j = 0; j < columns; j++) {
+				if ((board[i + 1][j] != BoardPiece.EMPTY)
+						&& falling_block_is_at(i, j)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private boolean falling_block_is_at(int row, int column) {
+		if (falling_block != null) {
+			return ((current_block_row <= row)
+					&& (row < current_block_row + falling_block.height())
+					&& (current_block_column <= column)
+					&& (column < current_block_column + falling_block.width()) && (!falling_block
+						.is_hollow_at(row - current_block_row, column
+								- current_block_column + falling_block.width()
+								/ 2 - 1)));
+		} else {
+			return false;
+		}
+	}
+
+	public void moveLeft() throws IllegalStateException {
+		if (falling_block != null) {
+			if (!last_tick) {
+				if (reached_left()) {
+					throw new IllegalStateException(Board.OUT_OF_BOARD);
+				}
+				current_block_column--;
+				if (reached_bottom() || touched_another_block()) {
+					last_tick = true;
+				}
+			} else {
+				fill_with(board, toString());
+				falling_block = null;
+				last_tick = false;
+			}
+		}
+	}
+
+	public void moveRight() {
+		if (falling_block != null) {
+			if (!last_tick) {
+				if (reached_right()) {
+					throw new IllegalStateException(Board.OUT_OF_BOARD);
+				}
+				current_block_column++;
+				if (reached_bottom() || touched_another_block()) {
+					last_tick = true;
+				}
+			} else {
+				fill_with(board, toString());
+				falling_block = null;
+				last_tick = false;
+			}
+		}
+	}
+
+	public void moveDown() {
+		if (falling_block != null) {
+			if (!last_tick) {
+				current_block_row++;
+				if (reached_bottom() || touched_another_block()) {
+					last_tick = true;
+				}
+			} else {
+				fill_with(board, toString());
+				falling_block = null;
+				last_tick = false;
+			}
+		}
+	}
+
 }
