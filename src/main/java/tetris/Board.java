@@ -115,7 +115,7 @@ public class Board {
 			}
 		}
 
-		return (reached_col == columns-1);
+		return (reached_col == columns - 1);
 	}
 
 	private boolean reached_left() {
@@ -164,9 +164,6 @@ public class Board {
 					throw new IllegalStateException(Board.OUT_OF_BOARD);
 				}
 				current_block_column--;
-				if (reached_bottom() || touched_another_block()) {
-					last_tick = true;
-				}
 			} else {
 				fill_with(board, toString());
 				falling_block = null;
@@ -182,9 +179,6 @@ public class Board {
 					throw new IllegalStateException(Board.OUT_OF_BOARD);
 				}
 				current_block_column++;
-				if (reached_bottom() || touched_another_block()) {
-					last_tick = true;
-				}
 			} else {
 				fill_with(board, toString());
 				falling_block = null;
