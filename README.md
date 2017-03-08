@@ -2,8 +2,10 @@
 TDD Tetris Tutorial
 ===================
 
-+[![Build Status](https://travis-ci.org/dclopez/tdd-tetris-tutorial.svg?branch=tutorial)](https://travis-ci.org/dclopez/tdd-tetris-tutorial)
- +
+[![Build Status](https://travis-ci.org/dclopez/tdd-tetris-tutorial.svg?branch=tutorial)](https://travis-ci.org/dclopez/tdd-tetris-tutorial)
+
+[![Coverage Status](https://coveralls.io/repos/github/dclopez/tdd-tetris-tutorial/badge.svg?branch=tutorial)](https://coveralls.io/github/dclopez/tdd-tetris-tutorial?branch=tutorial)
+ 
 
 In this tutorial you will be implementing a Tetris game using [Test-Driven Development](http://en.wikipedia.org/wiki/Test-driven_development) (TDD). Some 30 of the first tests have been provided, so that you just need to write code to pass them. The purpose of working with these pre-written test cases is to get accustomed to the TDD cycle, and to get some ideas on what kind of tests to write. After doing that for some while, it will be easier when it's time to begin writing your own tests towards the end of this tutorial.
 
