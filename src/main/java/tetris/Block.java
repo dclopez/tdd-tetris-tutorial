@@ -2,28 +2,28 @@ package tetris;
 
 public class Block implements BoardPiece {
 
-    private final char block;
+  private final char block;
 
-    public Block(char block) {
-        this.block = block;
-    }
+  public Block(char block) {
+    this.block = block;
+  }
 
-    public String toString() {
-        char block_as_string[] = { block };
-        return new String(block_as_string);
-    }
+  public String toString() {
+    char[] blockAsString = { block };
+    return new String(blockAsString);
+  }
 
-    public int width() {
-        return 1;
-    }
+  public int width() {
+    return 1;
+  }
 
-    public int height() {
-        return 1;
-    }
+  public int height() {
+    return 1;
+  }
 
-    public boolean is_hollow_at(int i, int j) {
-        return ((i!=0) && (j!=0));
+  public boolean is_hollow_at(int i, int j) {
+    return ((i != 0) && (j != 0));
 
-    }
+  }
 
 }

@@ -2,38 +2,38 @@ package tetris;
 
 public class Tetromino implements BoardPiece {
 
-    public static final Tetromino T_SHAPE = new Tetromino(new Piece(".T.\nTTT\n..."));
-    public static final Tetromino I_SHAPE = new Tetromino(new Piece("....\nIIII\n....\n....\n"));
-    public static final Tetromino O_SHAPE = new Tetromino(new Piece(".OO\n.OO\n..."));
-    
-    private Piece piece;
-    
-    private Tetromino(Piece piece) {
-        this.piece = piece;
-    }
+  public static final Tetromino T_SHAPE = new Tetromino(new Piece(".T.\nTTT\n..."));
+  public static final Tetromino I_SHAPE = new Tetromino(new Piece("....\nIIII\n....\n....\n"));
+  public static final Tetromino O_SHAPE = new Tetromino(new Piece(".OO\n.OO\n..."));
 
-    public String toString() {
-        return piece.toString();
-    }
+  private Piece piece;
 
-    public int width() {
-        return piece.width();
-    }
+  private Tetromino(Piece piece) {
+    this.piece = piece;
+  }
 
-    public int height() {
-        return piece.height();
-    }
+  public String toString() {
+    return piece.toString();
+  }
 
-    public boolean is_hollow_at(int i, int j) {
-        return piece.is_hollow_at(i, j);
-    }
+  public int width() {
+    return piece.width();
+  }
 
-    public Tetromino rotateRight() {
-        return new Tetromino(piece.rotateRight());
-    }
+  public int height() {
+    return piece.height();
+  }
 
-    public Tetromino rotateLeft() {
-        return new Tetromino(piece.rotateLeft());
-    }
-    
+  public boolean is_hollow_at(int i, int j) {
+    return piece.is_hollow_at(i, j);
+  }
+
+  public Tetromino rotateRight() {
+    return new Tetromino(piece.rotateRight());
+  }
+
+  public Tetromino rotateLeft() {
+    return new Tetromino(piece.rotateLeft());
+  }
+
 }
