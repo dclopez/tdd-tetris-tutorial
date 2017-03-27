@@ -63,7 +63,7 @@ public class Piece implements BoardPiece {
    * @param blocks Matriz de Blocks que se quiere transponer.
    * @return la matriz traspuesta.
    */
-  private Block[][] transpose(Block blocks[][]) {
+  private Block[][] transpose(Block [][] blocks) {
     Block[][] transposedBlocks = new Block[blocks.length][blocks[0].length];
     for (int i = 0; i < blocks.length; i++) {
       for (int j = 0; j < blocks[i].length; j++) {
@@ -78,7 +78,7 @@ public class Piece implements BoardPiece {
    * @param blocks matriz de Blocks.
    * @return la matriz de Blocks con las filas del revés.
    */
-  private Block[][] reverse_rows(Block blocks[][]) {
+  private Block[][] reverse_rows(Block [][]blocks) {
     Block[][] reversedBlocks = new Block[blocks.length][blocks[0].length];
     for (int i = 0; i < blocks.length; i++) {
       for (int j = 0; j < blocks[i].length; j++) {
@@ -88,7 +88,7 @@ public class Piece implements BoardPiece {
     return reversedBlocks;
   }
 
-  private Piece(Block blocks[][]) {
+  private Piece(Block [][]blocks) {
     this.blocks = blocks;
   }
 
