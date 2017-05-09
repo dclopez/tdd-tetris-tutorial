@@ -7,8 +7,8 @@ TDD Tetris Tutorial
 [![Coverage Status](https://coveralls.io/repos/github/dclopez/tdd-tetris-tutorial/badge.svg?branch=tutorial)](https://coveralls.io/github/dclopez/tdd-tetris-tutorial?branch=tutorial)
  
 *****En la parte de los mutantes quedó un superviviente que no supe eliminar*****
-*****En la parte de Checkstyle, en la clase Piece da unos mensajes "Soportes de matriz en posición ilegal." que no sé qué
-quieren decir y por eso no están solucionados*****
+*****La cobertura de ramas con JaCoCo quedó al 92%, las ramas que me quedaron sin cubrir, al menos hasta donde vi yo, no eran alcanzables*****
+*****El paso V quedó sin hacer, la documentación que encontré sobre las herramientas no fue suficiente para saber cómo utilizarlas*****
 
 In this tutorial you will be implementing a Tetris game using [Test-Driven Development](http://en.wikipedia.org/wiki/Test-driven_development) (TDD). Some 30 of the first tests have been provided, so that you just need to write code to pass them. The purpose of working with these pre-written test cases is to get accustomed to the TDD cycle, and to get some ideas on what kind of tests to write. After doing that for some while, it will be easier when it's time to begin writing your own tests towards the end of this tutorial.
 

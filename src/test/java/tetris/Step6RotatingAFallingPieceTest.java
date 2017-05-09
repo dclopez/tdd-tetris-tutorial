@@ -6,13 +6,13 @@ package tetris;
 
 import net.orfjackal.nestedjunit.NestedJUnit;
 
-import org.junit.Assert;
+import org.graphwalker.core.machine.ExecutionContext;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
 
 @Ignore("contains no test")
 @RunWith(NestedJUnit.class)
-public class Step6RotatingAFallingPieceTest extends Assert {
+public class Step6RotatingAFallingPieceTest extends ExecutionContext {
 
   // Step 6: Training wheels off
   // - Remove the @Ignore annotation from this class

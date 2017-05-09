@@ -4,17 +4,16 @@
 
 package tetris;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+
+import org.graphwalker.core.machine.ExecutionContext;
 import org.junit.Test;
-
-
-
 
 /**
  * @author Esko Luontola.
  */
 // @RunWith(NestedJUnit.class)
-public class Step2RotatingPiecesOfBlocksTest extends Assert {
+public class Step2RotatingPiecesOfBlocksTest extends ExecutionContext {
 
   // Step 2: Stepping stone for rotation algorithms
   // - Remove the @Ignore annotation from this class

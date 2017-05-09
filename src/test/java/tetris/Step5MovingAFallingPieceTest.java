@@ -4,13 +4,17 @@
 
 package tetris;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import org.graphwalker.core.machine.ExecutionContext;
 import org.junit.Test;
 
 
 
 //@RunWith(NestedJUnit.class)
-public class Step5MovingAFallingPieceTest extends Assert {
+public class Step5MovingAFallingPieceTest extends ExecutionContext {
 
   // Step 5: It's your turn now
   // - Remove the @Ignore annotation from this class

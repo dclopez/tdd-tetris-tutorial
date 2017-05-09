@@ -17,6 +17,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<graphwalker.version>3.4.2</graphwalker.version>
 	</properties>
 
 	<prerequisites>
@@ -66,6 +67,19 @@
 			<artifactId>mockito-all</artifactId>
 			<version>1.10.19</version>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>net.java.quickcheck</groupId>
+			<artifactId>quickcheck</artifactId>
+			<version>0.6</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.graphwalker</groupId>
+			<artifactId>graphwalker-core</artifactId>
+			<version>3.4.2</version>
 		</dependency>
 
 
@@ -184,8 +198,33 @@
 					<artifactId>maven-site-plugin</artifactId>
 					<version>3.1</version>
 				</plugin>
+				
+				<!-- Coverage -->
+
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>0.7.9</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.graphwalker</groupId>
+					<artifactId>graphwalker-maven-plugin</artifactId>
+					<version>${graphwalker.version}</version>
+					<!-- Bind goals to the default lifecycle -->
+					<executions>
+						<execution>
+							<id>generate-sources</id>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>generate-sources</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
 			</plugins>
 		</pluginManagement>
+
 	</build>
 
 </project>

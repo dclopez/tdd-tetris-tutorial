@@ -4,15 +4,18 @@
 
 package tetris;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
+import org.graphwalker.core.machine.ExecutionContext;
 import org.junit.Test;
 
 /**
  * @author Esko Luontola.
  */
 // @RunWith(NestedJUnit.class)
-public class Step1FallingBlocksTest extends Assert {
+public class Step1FallingBlocksTest extends ExecutionContext {
 
   // Step 1: Starting small
   // - See the README for motivation
